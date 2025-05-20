@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Tech S.A.</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <script>
+      if (!localStorage.getItem('usuarioLogado')) {
+        window.location.href = "login.html";
+      }
+    </script>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Portal Tech S.A.</a>
+            <ul>
+                <li><a href="login.html">login</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="catalogo.html">Catálogo</a></li>
+                <li><a href="carrinho.html">Carrinho</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="background-overlay">
+        <div class="content-wrapper">
+            <h1>Portal Tech S.A.</h1>
+            <h2>ESCOLHA UMA CATEGORIA</h2>
+            <div class="categories-card">
+                <a href="catalogo.html" class="category-link">
+                    <div class="category"><i class="fa-brands fa-html5"></i><span>HTML</span></div>
+                </a>
+                <a href="catalogo.html" class="category-link">
+                    <div class="category"><i class="fa-brands fa-js"></i><span>JavaScript</span></div>
+                </a>
+                <a href="catalogo.html" class="category-link">
+                    <div class="category"><i class="fa-brands fa-microsoft"></i><span>C#</span></div>
+                </a>
+                <a href="catalogo.html" class="category-link">
+                    <div class="category"><i class="fa-brands fa-python"></i><span>Python</span></div>
+                </a>
+                <a href="catalogo.html" class="category-link">
+                    <div class="category"><i class="fa-brands fa-php"></i><span>PHP</span></div>
+                </a>
+                <a href="catalogo.html" class="category-link">
+                    <div class="category"><i class="fa-brands fa-css3"></i><span>CSS3</span></div>
+                </a>
+                <a href="catalogo.html" class="category-link">
+                    <div class="category"><i class="fa-brands fa-java"></i><span>java</span></div>
+                </a>
+                <a href="catalogo.html" class="category-link">
+                    <div class="category"><i class="fa-brands fa-react"></i><span>React</span></div>
+                </a>
+                <a href="catalogo.html" class="category-link">
+                    <div class="category"><i class="fa-brands fa-laravel"></i><span>Laravel</span></div>
+                </a>
+            </div>
+
+            <!-- Nova seção de cadastro -->
+            <div class="home-cadastro-section">
+                <div class="cadastro-content">
+                    <div class="cadastro-text">
+                        <h2>Comece sua jornada na programação</h2>
+                        <p>Cadastre-se agora e tenha acesso a:</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Cursos completos e atualizados</li>
+                            <li><i class="fas fa-check"></i> Certificados reconhecidos</li>
+                            <li><i class="fas fa-check"></i> Suporte exclusivo</li>
+                            <li><i class="fas fa-check"></i> Comunidade de desenvolvedores</li>
+                        </ul>
+                    </div>
+                    <div class="cadastro-form-container">
+                        <form id="homeCadastroForm" class="home-cadastro-form">
+                            <div class="form-group">
+                                <label for="nome">Nome Completo</label>
+                                <input type="text" id="nome" name="nome" required>
+                                <span class="error-message" id="nomeError"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input type="email" id="email" name="email" required>
+                                <span class="error-message" id="emailError"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="senha">Senha</label>
+                                <input type="password" id="senha" name="senha" required>
+                                <span class="error-message" id="senhaError"></span>
+                            </div>
+                            <button type="submit" class="cadastro-btn">Começar Agora</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <footer>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Função para validar o nome
+        function validarNome(nome) {
+            if (nome.length < 3) {
+                return 'O nome deve ter pelo menos 3 caracteres';
+            }
+            if (!/^[a-zA-ZÀ-ÿ\s]+$/.test(nome)) {
+                return 'O nome deve conter apenas letras';
+            }
+            return '';
+        }
+
+        // Função para validar o email
+        function validarEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                return 'Digite um email válido';
+            }
+            return '';
+        }
+
+        // Função para validar a senha
+        function validarSenha(senha) {
+            if (senha.length < 6) {
+                return 'A senha deve ter pelo menos 6 caracteres';
+            }
+            if (!/[A-Z]/.test(senha)) {
+                return 'A senha deve conter pelo menos uma letra maiúscula';
+            }
+            if (!/[0-9]/.test(senha)) {
+                return 'A senha deve conter pelo menos um número';
+            }
+            return '';
+        }
+
+        // Função para mostrar mensagem de erro
+        function mostrarErro(elementId, mensagem) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = mensagem;
+            errorElement.style.display = mensagem ? 'block' : 'none';
+        }
+
+        // Função para limpar todos os erros
+        function limparErros() {
+            const errorElements = document.querySelectorAll('.error-message');
+            errorElements.forEach(element => {
+                element.textContent = '';
+                element.style.display = 'none';
+            });
+        }
+
+        // Manipular o envio do formulário
+        document.getElementById('homeCadastroForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            limparErros();
+
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            // Validar todos os campos
+            const nomeErro = validarNome(nome);
+            const emailErro = validarEmail(email);
+            const senhaErro = validarSenha(senha);
+
+            // Mostrar erros se houver
+            if (nomeErro) mostrarErro('nomeError', nomeErro);
+            if (emailErro) mostrarErro('emailError', emailErro);
+            if (senhaErro) mostrarErro('senhaError', senhaErro);
+
+            // Se houver algum erro, não prosseguir
+            if (nomeErro || emailErro || senhaErro) {
+                return;
+            }
+
+            // Criar objeto do usuário
+            const usuario = {
+                nome: nome,
+                email: email,
+                senha: senha
+            };
+
+            // Salvar usuário no localStorage
+            const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+            usuarios.push(usuario);
+            localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+            // Salvar usuário logado
+            localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+
+            // Mostrar mensagem de sucesso
+            alert('Cadastro realizado com sucesso!');
+
+            // Recarregar a página
+            window.location.reload();
+        });
+    </script>
+</body>
+</html> 

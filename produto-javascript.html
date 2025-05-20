@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Plugin - Portal Tech S.A.</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Portal Tech S.A.</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="catalogo.html">Catálogo</a></li>
+                <li><a href="carrinho.html">Carrinho</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="product-page-bg">
+        <div class="product-container">
+            <div class="product-image">
+                <img src="img/javascript-.webp" alt="JavaScript-curso">
+            </div>
+            <div class="product-details">
+                <h1>JavaScript-curso</h1>
+                <p class="product-desc">Plugin JavaScript para adicionar funcionalidades dinâmicas ao seu site. Compatível com todos os navegadores modernos.</p>
+                <div class="product-price">R$ 59,90</div>
+                <button class="add-to-cart-btn"><i class="fa fa-cart-plus"></i> Adicionar ao Carrinho</button>
+                <a href="sobre.html?curso=js" class="ver-btn">Ver detalhes</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        if (!localStorage.getItem('usuarioLogado')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+    <script src="carrinho.js"></script>
+</body>
+</html> 

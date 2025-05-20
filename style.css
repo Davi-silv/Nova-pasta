@@ -1,0 +1,733 @@
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 5px 10px;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #007bff;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.background-overlay {
+    min-height: 100vh;
+    width: 100vw;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.background-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 40, 0.7) 0%, rgba(0, 180, 255, 0.4) 100%);
+    z-index: 1;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+h1 {
+    color: #fff;
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+    text-align: center;
+}
+
+h2 {
+    color: #e0e0e0;
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.categories-card {
+    background: rgba(30, 30, 40, 0.65);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 18px;
+    padding: 40px 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 60px;
+    margin-bottom: 2.5rem;
+}
+
+.category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    font-size: 1.1rem;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.category-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.category-link:hover .category {
+    transform: translateY(-8px) scale(1.05);
+    color: #00bfff;
+}
+
+.category i {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 10px;
+}
+
+footer a {
+    color: #fff;
+    font-size: 1.7rem;
+    transition: color 0.2s;
+}
+
+footer a:hover {
+    color: #00bfff;
+}
+
+/* Menu de navegação fixo */
+.main-nav {
+    width: 100%;
+    background: rgba(20, 20, 40, 0.95);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    height: 60px;
+}
+.logo {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+.main-nav ul {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.main-nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+.main-nav ul li a:hover {
+    color: #00bfff;
+}
+
+/* Espaço para o conteúdo não ficar atrás do menu */
+.background-overlay, .product-page-bg {
+    padding-top: 70px;
+}
+
+/* Página de Produto */
+.product-page-bg {
+    min-height: 100vh;
+    width: 100vw;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.product-page-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 40, 0.7) 0%, rgba(0, 180, 255, 0.4) 100%);
+    z-index: 1;
+}
+.product-container {
+    display: flex;
+    gap: 40px;
+    background: rgba(30, 30, 40, 0.75);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 18px;
+    padding: 40px 60px;
+    position: relative;
+    z-index: 2;
+    align-items: center;
+}
+.product-image img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    background: #fff;
+}
+.product-details {
+    color: #fff;
+    max-width: 400px;
+}
+.product-details h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+.product-desc {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: #e0e0e0;
+}
+.product-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00bfff;
+    margin-bottom: 1.5rem;
+}
+.add-to-cart-btn {
+    background: #00bfff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.add-to-cart-btn:hover {
+    background: #0090c7;
+}
+
+/* Fundo e overlay para catálogo e carrinho */
+.catalogo-bg, .carrinho-bg {
+    min-height: 100vh;
+    width: 100vw;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-top: 70px;
+}
+.catalogo-bg::before, .carrinho-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 40, 0.7) 0%, rgba(0, 180, 255, 0.4) 100%);
+    z-index: 1;
+}
+
+.catalogo-container, .carrinho-container {
+    position: relative;
+    z-index: 2;
+    background: rgba(30, 30, 40, 0.75);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 18px;
+    padding: 40px 60px;
+    max-width: 1100px;
+    width: 100%;
+    margin: 40px 0;
+}
+.catalogo-container h1, .carrinho-container h1 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+/* Grade de produtos do catálogo */
+.produtos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 32px;
+}
+.produto-card {
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.produto-card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    background: #fff;
+}
+.produto-card h2 {
+    font-size: 1.1rem;
+    margin: 0 0 10px 0;
+    color: #fff;
+    text-align: center;
+}
+.produto-card .preco {
+    color: #00bfff;
+    font-weight: bold;
+    margin-bottom: 14px;
+}
+.detalhes-btn {
+    background: #00bfff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    margin-top: 8px;
+    display: inline-block;
+}
+.detalhes-btn:hover {
+    background: #0090c7;
+}
+.produto-card:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 4px 20px rgba(0,180,255,0.10);
+}
+
+/* Carrinho */
+.carrinho-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.carrinho-tabela th, .carrinho-tabela td {
+    padding: 14px 10px;
+    text-align: center;
+    color: #fff;
+}
+.carrinho-tabela th {
+    background: rgba(0,180,255,0.10);
+    font-weight: 600;
+}
+.carrinho-tabela tr:nth-child(even) {
+    background: rgba(255,255,255,0.02);
+}
+.remover-btn {
+    background: #ff4d4d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 14px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.2s;
+}
+.remover-btn:hover {
+    background: #c70000;
+}
+.carrinho-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    font-size: 1.2rem;
+    margin-top: 10px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.finalizar-btn {
+    background: #00bfff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 28px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.finalizar-btn:hover {
+    background: #0090c7;
+}
+
+/* Estilos para a página de cadastro */
+.cadastro-container {
+    background: rgba(30, 30, 40, 0.75);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 18px;
+    padding: 40px 60px;
+    width: 100%;
+    max-width: 500px;
+    margin: 40px 0;
+}
+
+.cadastro-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    color: #fff;
+    font-size: 1rem;
+}
+
+.form-group input {
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #00bfff;
+}
+
+.cadastro-btn {
+    background: #00bfff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 10px;
+}
+
+.cadastro-btn:hover {
+    background: #0090c7;
+}
+
+.login-link {
+    text-align: center;
+    color: #fff;
+    margin-top: 20px;
+}
+
+.login-link a {
+    color: #00bfff;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.login-link a:hover {
+    color: #0090c7;
+}
+
+/* Estilos para mensagens de erro */
+.error-message {
+    color: #ff4d4d;
+    font-size: 0.85rem;
+    margin-top: 4px;
+    display: none;
+}
+
+.form-group input.error {
+    border-color: #ff4d4d;
+}
+
+/* Estilos para carrinho vazio */
+.carrinho-vazio {
+    text-align: center;
+    color: #fff;
+    padding: 40px;
+}
+
+.carrinho-vazio p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Estilos para a página Sobre */
+.sobre-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    background: rgba(30, 30, 40, 0.75);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 18px;
+    padding: 40px;
+    color: #fff;
+}
+
+.sobre-container h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #fff;
+}
+
+.curso-section {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.curso-section:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 20px rgba(0, 180, 255, 0.1);
+}
+
+.curso-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.curso-header i {
+    font-size: 2rem;
+    color: #00bfff;
+}
+
+.curso-header h2 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.curso-content {
+    color: #e0e0e0;
+}
+
+.curso-content p {
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
+
+.curso-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px 0;
+}
+
+.curso-content ul li {
+    padding: 8px 0;
+    padding-left: 24px;
+    position: relative;
+}
+
+.curso-content ul li:before {
+    content: '•';
+    color: #00bfff;
+    position: absolute;
+    left: 0;
+}
+
+.curso-duracao {
+    color: #00bfff;
+    font-weight: 500;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Estilos para a seção de cadastro na home */
+.home-cadastro-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.cadastro-content {
+    background: rgba(30, 30, 40, 0.75);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 18px;
+    padding: 40px;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.cadastro-text {
+    flex: 1;
+    color: #fff;
+}
+
+.cadastro-text h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.cadastro-text p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: #e0e0e0;
+}
+
+.cadastro-text ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cadastro-text ul li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    color: #e0e0e0;
+}
+
+.cadastro-text ul li i {
+    color: #00bfff;
+}
+
+.cadastro-form-container {
+    flex: 1;
+    max-width: 400px;
+}
+
+.home-cadastro-form {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 12px;
+}
+
+.home-cadastro-form .form-group {
+    margin-bottom: 20px;
+}
+
+.home-cadastro-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.home-cadastro-form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    font-size: 1rem;
+}
+
+.home-cadastro-form input:focus {
+    outline: none;
+    border-color: #00bfff;
+}
+
+.home-cadastro-form .cadastro-btn {
+    width: 100%;
+    padding: 14px;
+    background: #00bfff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.home-cadastro-form .cadastro-btn:hover {
+    background: #0090c7;
+}
+
+/* Responsividade para a seção de cadastro */
+@media (max-width: 768px) {
+    .cadastro-content {
+        flex-direction: column;
+        padding: 30px;
+    }
+
+    .cadastro-form-container {
+        max-width: 100%;
+    }
+
+    .cadastro-text h2 {
+        font-size: 1.8rem;
+    }
+} 

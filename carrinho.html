@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho - Portal Tech S.A.</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Portal Tech S.A.</a>
+            <ul>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="catalogo.html">Catálogo</a></li>
+                <li><a href="carrinho.html">Carrinho</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="background-overlay">
+        <div class="content-wrapper">
+            <div class="carrinho-container">
+                <h1>Seu Carrinho</h1>
+                <div id="carrinhoVazio" class="carrinho-vazio" style="display: none;">
+                    <p>Seu carrinho está vazio</p>
+                    <a href="catalogo.html" class="detalhes-btn">Ver Cursos</a>
+                </div>
+                <div id="carrinhoConteudo">
+                    <table class="carrinho-tabela">
+                        <thead>
+                            <tr>
+                                <th>Curso</th>
+                                <th>Preço</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="carrinhoItems">
+                        </tbody>
+                    </table>
+                    <div class="carrinho-total">
+                        <span>Total: R$ <span id="carrinhoTotal">0.00</span></span>
+                        <button id="finalizarCompra" class="finalizar-btn">Finalizar Compra</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Verificar se o usuário está logado
+        function verificarLogin() {
+            const usuarioLogado = localStorage.getItem('usuarioLogado');
+            if (!usuarioLogado) {
+                alert('Por favor, faça login ou cadastre-se para finalizar a compra.');
+                window.location.href = 'cadastro.html';
+                return false;
+            }
+            return true;
+        }
+
+        // Função para enviar email (simulada)
+        function enviarEmailAcesso(email, cursos) {
+            // Em um ambiente real, isso seria uma chamada para um servidor
+            console.log(`Email enviado para ${email} com acesso aos cursos:`);
+            cursos.forEach(curso => {
+                console.log(`- ${curso.nome}: ${curso.acesso}`);
+            });
+            return true;
+        }
+
+        // Função para gerar código de acesso
+        function gerarCodigoAcesso() {
+            return Math.random().toString(36).substring(2, 15) + 
+                   Math.random().toString(36).substring(2, 15);
+        }
+
+        // Função para finalizar compra
+        function finalizarCompra() {
+            if (!verificarLogin()) return;
+
+            const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
+            const carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
+            
+            if (carrinho.length === 0) {
+                alert('Seu carrinho está vazio!');
+                return;
+            }
+
+            // Gerar códigos de acesso para cada curso
+            const cursosComAcesso = carrinho.map(curso => ({
+                ...curso,
+                acesso: gerarCodigoAcesso()
+            }));
+
+            // Enviar email com os acessos
+            if (enviarEmailAcesso(usuario.email, cursosComAcesso)) {
+                // Limpar carrinho
+                localStorage.removeItem('carrinho');
+                
+                // Atualizar lista de cursos do usuário
+                const usuarioCursos = JSON.parse(localStorage.getItem('usuarioCursos') || '[]');
+                usuarioCursos.push(...cursosComAcesso);
+                localStorage.setItem('usuarioCursos', JSON.stringify(usuarioCursos));
+
+                alert('Compra realizada com sucesso! Um email foi enviado com os acessos aos cursos.');
+                window.location.href = 'index.html';
+            } else {
+                alert('Erro ao processar a compra. Por favor, tente novamente.');
+            }
+        }
+
+        // Carregar carrinho
+        function carregarCarrinho() {
+            const carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
+            const carrinhoItems = document.getElementById('carrinhoItems');
+            const carrinhoTotal = document.getElementById('carrinhoTotal');
+            const carrinhoVazio = document.getElementById('carrinhoVazio');
+            const carrinhoConteudo = document.getElementById('carrinhoConteudo');
+
+            if (carrinho.length === 0) {
+                carrinhoVazio.style.display = 'block';
+                carrinhoConteudo.style.display = 'none';
+                return;
+            }
+
+            carrinhoVazio.style.display = 'none';
+            carrinhoConteudo.style.display = 'block';
+
+            let total = 0;
+            carrinhoItems.innerHTML = '';
+
+            carrinho.forEach((item, index) => {
+                total += item.preco;
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${item.nome}</td>
+                    <td>R$ ${item.preco.toFixed(2)}</td>
+                    <td>
+                        <button onclick="removerItem(${index})" class="remover-btn">
+                            Remover
+                        </button>
+                    </td>
+                `;
+                carrinhoItems.appendChild(tr);
+            });
+
+            carrinhoTotal.textContent = total.toFixed(2);
+        }
+
+        // Remover item do carrinho
+        function removerItem(index) {
+            const carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
+            carrinho.splice(index, 1);
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+            carregarCarrinho();
+        }
+
+        // Event Listeners
+        document.getElementById('finalizarCompra').addEventListener('click', finalizarCompra);
+        document.addEventListener('DOMContentLoaded', carregarCarrinho);
+    </script>
+</body>
+</html> 
