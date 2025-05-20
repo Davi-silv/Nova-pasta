@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Portal Tech S.A.</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Portal Tech S.A.</a>
+            <ul>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="catalogo.html">Catálogo</a></li>
+                <li><a href="carrinho.html">Carrinho</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="background-overlay">
+        <div class="content-wrapper">
+            <div class="cadastro-container">
+                <h1>Cadastro</h1>
+                <form id="cadastroForm" class="cadastro-form">
+                    <div class="form-group">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" required>
+                        <span class="error-message" id="nomeError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" required>
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" name="senha" required>
+                        <span class="error-message" id="senhaError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmarSenha">Confirmar Senha</label>
+                        <input type="password" id="confirmarSenha" name="confirmarSenha" required>
+                        <span class="error-message" id="confirmarSenhaError"></span>
+                    </div>
+                    <button type="submit" class="cadastro-btn">Cadastrar</button>
+                </form>
+                <p class="login-link">Já tem uma conta? <a href="login.html">Faça login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para validar o nome
+        function validarNome(nome) {
+            if (nome.length < 3) {
+                return 'O nome deve ter pelo menos 3 caracteres';
+            }
+            if (!/^[a-zA-ZÀ-ÿ\s]+$/.test(nome)) {
+                return 'O nome deve conter apenas letras';
+            }
+            return '';
+        }
+
+        // Função para validar o email
+        function validarEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                return 'Digite um email válido';
+            }
+            return '';
+        }
+
+        // Função para validar a senha
+        function validarSenha(senha) {
+            if (senha.length < 6) {
+                return 'A senha deve ter pelo menos 6 caracteres';
+            }
+            if (!/[A-Z]/.test(senha)) {
+                return 'A senha deve conter pelo menos uma letra maiúscula';
+            }
+            if (!/[0-9]/.test(senha)) {
+                return 'A senha deve conter pelo menos um número';
+            }
+            return '';
+        }
+
+        // Função para mostrar mensagem de erro
+        function mostrarErro(elementId, mensagem) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = mensagem;
+            errorElement.style.display = mensagem ? 'block' : 'none';
+        }
+
+        // Função para limpar todos os erros
+        function limparErros() {
+            const errorElements = document.querySelectorAll('.error-message');
+            errorElements.forEach(element => {
+                element.textContent = '';
+                element.style.display = 'none';
+            });
+        }
+
+        // Função para verificar se o email já está cadastrado
+        function emailJaCadastrado(email) {
+            const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+            return usuarios.some(usuario => usuario.email === email);
+        }
+
+        // Adicionar eventos de validação em tempo real
+        document.getElementById('nome').addEventListener('input', function() {
+            const erro = validarNome(this.value);
+            mostrarErro('nomeError', erro);
+        });
+
+        document.getElementById('email').addEventListener('input', function() {
+            const erro = validarEmail(this.value);
+            mostrarErro('emailError', erro);
+        });
+
+        document.getElementById('senha').addEventListener('input', function() {
+            const erro = validarSenha(this.value);
+            mostrarErro('senhaError', erro);
+        });
+
+        document.getElementById('confirmarSenha').addEventListener('input', function() {
+            const senha = document.getElementById('senha').value;
+            const erro = this.value !== senha ? 'As senhas não coincidem' : '';
+            mostrarErro('confirmarSenhaError', erro);
+        });
+
+        // Manipular o envio do formulário
+        document.getElementById('cadastroForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            limparErros();
+
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+            const confirmarSenha = document.getElementById('confirmarSenha').value;
+
+            // Validar todos os campos
+            const nomeErro = validarNome(nome);
+            const emailErro = validarEmail(email);
+            const senhaErro = validarSenha(senha);
+            const confirmarSenhaErro = confirmarSenha !== senha ? 'As senhas não coincidem' : '';
+
+            // Mostrar erros se houver
+            if (nomeErro) mostrarErro('nomeError', nomeErro);
+            if (emailErro) mostrarErro('emailError', emailErro);
+            if (senhaErro) mostrarErro('senhaError', senhaErro);
+            if (confirmarSenhaErro) mostrarErro('confirmarSenhaError', confirmarSenhaErro);
+
+            // Se houver algum erro, não prosseguir
+            if (nomeErro || emailErro || senhaErro || confirmarSenhaErro) {
+                return;
+            }
+
+            // Verificar se o email já está cadastrado
+            if (emailJaCadastrado(email)) {
+                mostrarErro('emailError', 'Este email já está cadastrado');
+                return;
+            }
+
+            // Criar objeto do usuário
+            const usuario = {
+                nome: nome,
+                email: email,
+                senha: senha
+            };
+
+            // Salvar usuário no localStorage
+            const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+            usuarios.push(usuario);
+            localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+            // Salvar usuário logado
+            localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+
+            // Mostrar mensagem de sucesso
+            alert('Cadastro realizado com sucesso!');
+
+            // Redirecionar para a página inicial
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html> 
