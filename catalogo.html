@@ -6,6 +6,95 @@
     <title>Catálogo - Portal Tech S.A.</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .cursos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .curso-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .curso-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .curso-imagem {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .curso-info {
+            padding: 15px;
+        }
+
+        .curso-titulo {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .curso-descricao {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        .curso-preco {
+            font-size: 1.3em;
+            color: #2ecc71;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .curso-categoria {
+            display: inline-block;
+            padding: 5px 10px;
+            background: #f0f0f0;
+            border-radius: 15px;
+            font-size: 0.8em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .btn-adicionar {
+            background: #2ecc71;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .btn-adicionar:hover {
+            background: #27ae60;
+        }
+
+        .filtros {
+            padding: 20px;
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .filtros select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
     <nav class="main-nav">
@@ -19,67 +108,104 @@
             </ul>
         </div>
     </nav>
-    <div class="catalogo-bg">
-        <div class="catalogo-container">
-            <h1>Catálogo de Produtos</h1>
-            <div class="produtos-grid">
-                <div class="produto-card">
-                    <img src="img/html.webp" alt="HTML curso">
-                    <h2>HTML </h2>
-                    <div class="preco">R$ 49,90</div>
-                    <button class="add-to-cart-btn" data-nome="HTML" data-preco="49.90"><i class="fa fa-cart-plus"></i> Adicionar ao Carrinho</button>
-                </div>
-                <div class="produto-card">
-                    <img src="img/CSS.jfif" alt="CSS-curso">
-                    <h2>CSS </h2>
-                    <div class="preco">R$ 49,90</div>
-                    <button class="add-to-cart-btn" data-nome="CSS" data-preco="49.90"><i class="fa fa-cart-plus"></i> Adicionar ao Carrinho</button>
-                </div>
-                <div class="produto-card">
-                    <img src="img/javascript-.webp" alt="JavaScript-curso">
-                    <h2>JavaScript</h2>
-                    <div class="preco">R$ 59,90</div>
-                    <button class="add-to-cart-btn" data-nome="JavaScript" data-preco="59.90"><i class="fa fa-cart-plus"></i> Adicionar ao Carrinho</button>
-                </div>
-                <div class="produto-card">
-                    <img src="img/python.webp" alt="Python - curso">
-                    <h2>Python </h2>
-                    <div class="preco">R$ 79,90</div>
-                    <button class="add-to-cart-btn" data-nome="Python" data-preco="79.90"><i class="fa fa-cart-plus"></i> Adicionar ao Carrinho</button>
-                </div>
-                <div class="produto-card">
-                    <img src="img/images.png" alt="PHP-curso">
-                    <h2>PHP </h2>
-                    <div class="preco">R$ 99,90</div>
-                    <button class="add-to-cart-btn" data-nome="PHP" data-preco="99.90"><i class="fa fa-cart-plus"></i> Adicionar ao Carrinho</button>
-                </div>
-                <div class="produto-card">
-                    <img src="img/C.png" alt="C#-curso">
-                    <h2>C# </h2>
-                    <div class="preco">R$ 89,90</div>
-                    <button class="add-to-cart-btn" data-nome="C#" data-preco="89.90"><i class="fa fa-cart-plus"></i> Adicionar ao Carrinho</button>
-                </div>
-                <div class="produto-card">
-                    <img src="img/java.png" alt="java-curso">
-                    <h2>java </h2>
-                    <div class="preco">R$ 90,90</div>
-                    <button class="add-to-cart-btn" data-nome="java" data-preco="89.90"><i class="fa fa-cart-plus"></i> Adicionar ao Carrinho</button>
-                </div>
-                <div class="produto-card">
-                    <img src="img/laravel.png" alt="laravel-curso">
-                    <h2>laravel </h2>
-                    <div class="preco">R$ 89,90</div>
-                    <button class="add-to-cart-btn" data-nome="laravel" data-preco="89.90"><i class="fa fa-cart-plus"></i> Adicionar ao Carrinho</button>
-                </div>
-                <div class="produto-card">
-                    <img src="img/react.jfif" alt="react-curso">
-                    <h2>react </h2>
-                    <div class="preco">R$ 60,90</div>
-                    <button class="add-to-cart-btn" data-nome="react" data-preco="89.90"><i class="fa fa-cart-plus"></i> Adicionar ao Carrinho</button>
-                </div>
+
+    <div class="background-overlay">
+        <div class="content-wrapper">
+            <h1>Catálogo de Cursos</h1>
+
+            <div class="filtros">
+                <select id="categoriaFiltro">
+                    <option value="">Todas as categorias</option>
+                    <option value="1">HTML</option>
+                    <option value="2">JavaScript</option>
+                    <option value="3">C#</option>
+                    <option value="4">Python</option>
+                    <option value="5">PHP</option>
+                    <option value="6">CSS3</option>
+                    <option value="7">Java</option>
+                    <option value="8">React</option>
+                    <option value="9">Laravel</option>
+                </select>
+            </div>
+
+            <div class="cursos-grid" id="cursosGrid">
+                <!-- Os cursos serão carregados aqui via JavaScript -->
             </div>
         </div>
     </div>
-    <script src="carrinho.js"></script>
+
+    <script>
+        // Função para carregar os cursos
+        async function carregarCursos(categoriaId = '') {
+            try {
+                const url = categoriaId 
+                    ? `api/api.php?action=cursos&categoria_id=${categoriaId}`
+                    : 'api/api.php?action=cursos';
+                
+                const response = await fetch(url);
+                const cursos = await response.json();
+                
+                const cursosGrid = document.getElementById('cursosGrid');
+                cursosGrid.innerHTML = '';
+                
+                cursos.forEach(curso => {
+                    const cursoCard = document.createElement('div');
+                    cursoCard.className = 'curso-card';
+                    cursoCard.innerHTML = `
+                        <img src="${curso.imagem || 'https://via.placeholder.com/300x200'}" alt="${curso.titulo}" class="curso-imagem">
+                        <div class="curso-info">
+                            <div class="curso-categoria">
+                                <i class="${curso.categoria_icone}"></i> ${curso.categoria_nome}
+                            </div>
+                            <h3 class="curso-titulo">${curso.titulo}</h3>
+                            <p class="curso-descricao">${curso.descricao}</p>
+                            <div class="curso-preco">R$ ${parseFloat(curso.preco).toFixed(2)}</div>
+                            <button class="btn-adicionar" onclick="adicionarAoCarrinho(${curso.id})">
+                                Adicionar ao Carrinho
+                            </button>
+                        </div>
+                    `;
+                    cursosGrid.appendChild(cursoCard);
+                });
+            } catch (error) {
+                console.error('Erro ao carregar cursos:', error);
+                alert('Erro ao carregar os cursos. Tente novamente mais tarde.');
+            }
+        }
+
+        // Função para adicionar curso ao carrinho
+        async function adicionarAoCarrinho(cursoId) {
+            try {
+                const response = await fetch('api/api.php?action=carrinho', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ curso_id: cursoId })
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('Curso adicionado ao carrinho!');
+                } else {
+                    alert(result.message);
+                }
+            } catch (error) {
+                console.error('Erro ao adicionar ao carrinho:', error);
+                alert('Erro ao adicionar ao carrinho. Tente novamente mais tarde.');
+            }
+        }
+
+        // Carregar cursos ao iniciar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarCursos();
+        });
+
+        // Filtrar cursos por categoria
+        document.getElementById('categoriaFiltro').addEventListener('change', (e) => {
+            carregarCursos(e.target.value);
+        });
+    </script>
 </body>
 </html> 

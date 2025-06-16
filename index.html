@@ -149,7 +149,7 @@
         }
 
         // Manipular o envio do formulário
-        document.getElementById('homeCadastroForm').addEventListener('submit', function(e) {
+        document.getElementById('homeCadastroForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             limparErros();
 
@@ -172,26 +172,30 @@
                 return;
             }
 
-            // Criar objeto do usuário
-            const usuario = {
-                nome: nome,
-                email: email,
-                senha: senha
-            };
+            try {
+                const response = await fetch('api/api.php?action=cadastro', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        nome: nome,
+                        email: email,
+                        senha: senha
+                    })
+                });
 
-            // Salvar usuário no localStorage
-            const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-            usuarios.push(usuario);
-            localStorage.setItem('usuarios', JSON.stringify(usuarios));
-
-            // Salvar usuário logado
-            localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
-
-            // Mostrar mensagem de sucesso
-            alert('Cadastro realizado com sucesso!');
-
-            // Recarregar a página
-            window.location.reload();
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('Cadastro realizado com sucesso!');
+                    window.location.reload();
+                } else {
+                    mostrarErro('emailError', result.message);
+                }
+            } catch (error) {
+                alert('Erro ao fazer cadastro: ' + error.message);
+            }
         });
     </script>
 </body>
